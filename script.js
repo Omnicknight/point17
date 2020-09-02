@@ -1,86 +1,77 @@
-// const num = new Number();
-
-// console.log(num);
-
-// const obj = {
-//     __list: 'anything',
-// };
-
-// Object.defineProperty(obj, 'list', {
-//     get: function () {
-//         return [];
-//     },
-//     set: function () {
-//         console.log('Hello world');
-//     },
-// });
-
-// console.log(obj.list, obj);
-
-// obj.list = 5;
-
-// Object.prototype.someNewMethod = function () {
-//     console.log(this);
-// };
-
-// const obj = {
-//     a: 2,
-// };
-
-// console.log(obj);
-
-// function Employee() {
-//     this.salary = 1000;
-// }
-
-// Employee.prototype.method = function () {
-//     console.log(this.salary);
-// }
-
-// const e = new Employee();
-
-// console.log(e);
-
-// e.method();
-
-function Employee(salary) {
-    this.level = 1,
-    this.salary = salary;
+function Animal(gender) {
+    this.gender = gender;
 }
 
-Employee.prototype.upgrade = function () {
-    this.salary = this.salary + this.salary * (this.level++ / 10);
+Animal.prototype.run = function () {
+    console.log('run');
+};
+Animal.prototype.bounce = function () {};
+
+function Mammal(gender) {
+    Animal.call(this, gender);
+}
+
+Mammal.prototype = Object.create(Animal.prototype);
+
+Mammal.prototype.constructor = Mammal;
+
+Mammal.prototype.getMilk = function() {
+    if(this.gender==='female') {
+        console.log('you take milk');
+    } else {
+        console.log('Opps');
+    } 
 };
 
-function Manager() {
-    Employee.call(this, 500);
+function Raccoon(gender) {
+    Mammal.call(this, gender);
 }
 
-function Developer() {
-    Employee.call(this, 2000);
+function Lama(gender) {
+    Mammal.call(this, gender);
 }
 
-Manager.prototype = Object.create(Employee.prototype);
+function Pug(gender) {
+    Mammal.call(this, gender);
+}
 
-Manager.prototype.constructor = Manager;
+Pug.prototype = Object.create(Mammal.prototype);
 
-Developer.prototype = Object.create(Employee.prototype);
+Pug.prototype.constructor = Pug;
 
-Developer.prototype.constructor = Developer;
+Pug.prototype.bunch = function() {
+    console.log('what the smell?');
+}
+
+Lama.prototype = Object.create(Mammal.prototype);
+
+Lama.prototype.constructor = Lama;
+
+Lama.prototype.spit = function() {
+    console.log('yee, in you fucking face!!');
+}
+
+Raccoon.prototype = Object.create(Mammal.prototype);
+
+Raccoon.prototype.constructor = Raccoon;
+
+Raccoon.prototype.steal = function() {
+    console.log('you steal some');
+}
+ 
+const red = new Raccoon('male');
+
+const bart = new Lama('female');
+
+const garry = new Pug('male');
+
+console.log(red);
 
 
-
-const e = new Manager();
-
-const r = new Developer();
-
-e.upgrade();
-e.upgrade();
-e.upgrade();
-e.upgrade();
-e.upgrade();
-e.upgrade();
-
-r.upgrade();
-
-console.log(e, r);
+red.run();
+red.getMilk();
+red.steal();
+bart.spit();
+bart.run();
+garry.bunch();
+garry.getMilk();
