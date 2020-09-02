@@ -48,7 +48,7 @@ Lama.prototype = Object.create(Mammal.prototype);
 Lama.prototype.constructor = Lama;
 
 Lama.prototype.spit = function() {
-    console.log('yee, in you fucking face!!');
+    console.log('yee, in your fucking face!!');
 }
 
 Raccoon.prototype = Object.create(Mammal.prototype);
